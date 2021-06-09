@@ -49,7 +49,7 @@ The following is an example sbatch script for running the tool on Great Lakes as
 module add python3.7-anaconda
 module add spark/3.0.3
 
-spark-submit --num-executors 20 --executor-memory 8g /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py/ -k /home/arburks/COVIDTerms.txt -i file:///nfs/turbo/twitter-decahose/decahose/raw/decahose.2020-07-31.* -o /home/arburks/decahose_filter_test
+spark-submit --num-executors 20 --executor-memory 8g /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py -k /home/arburks/COVIDTerms.txt -i file:///nfs/turbo/twitter-decahose/decahose/raw/decahose.2020-07-31.* -o /home/arburks/decahose_filter_test
 ```
 
 The above sbatch script could then be run as a batch job on Great Lakes by running the following command (assuming that the script is named `decahose-filter.py`:
