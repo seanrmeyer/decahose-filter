@@ -52,14 +52,13 @@ module add spark/3.0.3
 spark-submit --num-executors 20 --executor-memory 8g /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py -k /home/arburks/COVIDTerms.txt -i file:///nfs/turbo/twitter-decahose/decahose/raw/decahose.2020-07-31.* -o /home/arburks/decahose_filter_test
 ```
 
-The above sbatch script could then be run as a batch job on Great Lakes by running the following command (assuming that the script is named `decahose-filter.py`:
+The above sbatch script could then be run as a batch job on Great Lakes by running the following command (assuming that the above script is named `decahose-filter.sh`:
 ```bash
-sbatch decahose-filter.py
+sbatch decahose-filter.sh
 ```
 
 Similarly, if desired, the script can be run interactively in on Great Lakes with an interactive job using the `srun` command. Run the `srun` command, specifying all the necessary resources being requested, and then once the interactive session begins, the tool can be run by entering the last three lines of the above script.
 
 
 ### Running the Tool with a Multi-node Configuration
-TODO
-
+Coming soon.
