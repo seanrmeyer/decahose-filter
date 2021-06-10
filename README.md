@@ -1,5 +1,5 @@
 # decahose-filter
-The decahose-filter tool is a general tool developed at the University of Michigan and written in PySpark, and it can be used to filter Twitter Decahose data to create a that match a keyword list. The purpose of this tool is to provide a way to generate small subsets of data of interest as a first, preprocessing, step for research. This allows users to avoid the expensive computational effort of filtering the data each time in order to perform further analysis. Therefore, this tool is most useful for subsets of data that will be used multiple times since the filtering would only need to be performed once.
+The decahose-filter tool is a general tool developed at the University of Michigan and written in PySpark. The purpose of this tool is to provide a way to generate small subsets of data of interest as an initial, preprocessing, step for research. The tool accepts a keyword list and then uses the list to filter Twitter Decahose data to create a subset containing tweets that match the keywords. This allows users to avoid the expensive computational effort of filtering the data each time in order to perform further analysis. Therefore, this tool is most useful for subsets of data that will be used multiple times, since the filtering would only need to be performed once.
 
 ## Tool Location
 The tool can be cloned from this repository or found in Turbo storage at the following location:
@@ -58,4 +58,8 @@ sbatch decahose-filter.py
 ```
 
 Similarly, if desired, the script can be run interactively in on Great Lakes with an interactive job using the `srun` command. Run the `srun` command, specifying all the necessary resources being requested, and then once the interactive session begins, the tool can be run by entering the last three lines of the above script.
+
+
+### Running the Tool with a Multi-node Configuration
+TODO
 
