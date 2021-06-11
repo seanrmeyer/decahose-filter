@@ -29,7 +29,7 @@ spark-submit --master yarn --num-executors 10 --executor-memory 4g --executor-co
 
 Also, note that the input file is assumed by Spark/Hadoop to be located in HDFS. If we wanted to use a file located on the Linux filesystem, we could add `file://` at the beginning of the path.
 
-### Running the tool on Great Lakes
+### Running the Tool on Great Lakes
 The tool can be run on the Great Lakes cluster either by submitting it as a batch job using the `sbatch` command or running it in an interactive job that was started with the `srun` command.
 
 The following is an example sbatch script for running the tool on Great Lakes as a batch job. Note that you will need to specify your root account name and set the requested resources as needed for your job. Note that you should request one more core (cpus-per-task) than the total number of executors that you wish to have. This extra core will be used by the PySpark driver. See https://arc.umich.edu/greatlakes/user-guide for more general information on running jobs on Great Lakes.
@@ -49,7 +49,11 @@ The following is an example sbatch script for running the tool on Great Lakes as
 module add python3.7-anaconda
 module add spark/3.0.3
 
-spark-submit --num-executors 20 --executor-memory 8g /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py -k /home/arburks/COVIDTerms.txt -i file:///nfs/turbo/twitter-decahose/decahose/raw/decahose.2020-07-31.* -o /home/arburks/decahose_filter_test
+spark-submit --num-executors 20 --executor-memory 8g \
+/nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py \
+-k /home/arburks/COVIDTerms.txt \
+-i file:///nfs/turbo/twitter-decahose/decahose/raw/decahose.2020-07-31.* \
+-o /home/arburks/decahose_filter_test
 ```
 
 The above sbatch script could then be run as a batch job on Great Lakes by running the following command (assuming that the above script is named `decahose-filter.sh`:
