@@ -17,14 +17,22 @@ The decahose-filter tool is a simple command-line utility that can be run on the
 ### Running the Tool on Cavium-ThunderX
 The tool can be run with the `spark-submit` command on Cavium-ThunderX such as the following example:
 ```bash
-spark-submit --master yarn --num-executors <REQUESTED_NUM_EXECUTORS> --executor-memory <REQUESTED_EXECUTOR_MEMORY> --executor-cores <REQUESTED_EXECUTOR_CORES> /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py  -k <PATH_TO_KEYWORD_LIST_FILE> -i <INPUT_PATH> -o <OUTPUT_PATH_IN_HDFS>
+spark-submit --master yarn --num-executors <REQUESTED_NUM_EXECUTORS> \
+--executor-memory <REQUESTED_EXECUTOR_MEMORY> --executor-cores <REQUESTED_EXECUTOR_CORES> \
+/nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py  \
+-k <PATH_TO_KEYWORD_LIST_FILE> -i <INPUT_PATH> -o <OUTPUT_PATH_IN_HDFS>
 ```
 Replace `<REQUESTED_NUM_EXECUTORS>`, `<REQUESTED_EXECUTOR_MEMORY>`, `<REQUESTED_EXECUTOR_CORES>`, `<PATH_TO_KEYWORD_LIST_FILE>`, `<INPUT_PATH>`, and `<OUTPUT_PATH_IN_HDFS>` with appropriate values for your particular filtering job that you are running. Note that you will need to request an appropriate number of cores and memory depending on the size of your data and how much parallelism you would like to request for speeding up processing. As a general rule of thumb, the total memory requested should be at least the size of the input data in gigabytes (GB).
 
 As a concrete example, the following would run the tool for all the files for the date 2020-07-04, using the keyword list file `COVIDTerms.txt` and output the data under the path `/user/arburks/decahose_filter_test` in HDFS:
 
 ```bash
-spark-submit --master yarn --num-executors 10 --executor-memory 4g --executor-cores 4 /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py -k COVIDTerms.txt -i /data/twitter/decahose/2020/decahose.2020-07-04*bz2 -o /user/arburks/decahose_filter_test
+spark-submit --master yarn --num-executors 10 \
+--executor-memory 4g --executor-cores 4 \
+/nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py \
+-k COVIDTerms.txt \
+-i /data/twitter/decahose/2020/decahose.2020-07-04*bz2 \
+-o /user/arburks/decahose_filter_test
 ```
 
 Also, note that the input file is assumed by Spark/Hadoop to be located in HDFS. If we wanted to use a file located on the Linux filesystem, we could add `file://` at the beginning of the path.
