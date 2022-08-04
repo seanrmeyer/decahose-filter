@@ -14,9 +14,11 @@ The decahose-filter tool is a simple command-line utility that can be run on the
 * input - This is the path to the input file(s) to be processed. This can be a HDFS path (if using Cavium-ThunderX) or a linux path (such as /nfs/turbo or a local file). This argument can be specified as `--input` or simply as `-i`.
 * output - This is the path to the output directory under which the resulting subset of data be stored. If using Cavium-ThunderX, this will be an output directory in HDFS, and if using Great Lakes, this will be an output directory on the Linux filesystem. This argument can be specified as `--output` or simply as `-o`.
 
-### Running the Tool on Cavium-ThunderX
+### Running the Tool on Great Lakes CLI
 The tool can be run with the `spark-submit` command on Cavium-ThunderX such as the following example:
 ```bash
+module load spark
+
 spark-submit --master yarn --num-executors <REQUESTED_NUM_EXECUTORS> \
 --executor-memory <REQUESTED_EXECUTOR_MEMORY> --executor-cores <REQUESTED_EXECUTOR_CORES> \
 /nfs/turbo/twitter-decahose/tools/decahose-filter/decahose_filter.py  \
@@ -35,9 +37,9 @@ spark-submit --master yarn --num-executors 10 \
 -o /user/arburks/decahose_filter_test
 ```
 
-Also, note that the input file is assumed by Spark/Hadoop to be located in HDFS. If we wanted to use a file located on the Linux filesystem, we could add `file://` at the beginning of the path.
+Also, note that the input file is assumed by Spark to be located in HDFS. If we wanted to use a file located on the Linux filesystem, we could add `file://` at the beginning of the path.
 
-### Running the Tool on Great Lakes
+### Running the Tool on Great Lakes as a batch job
 The tool can be run on the Great Lakes cluster either by submitting it as a batch job using the `sbatch` command or running it in an interactive job that was started with the `srun` command.
 
 The following is an example sbatch script for running the tool on Great Lakes as a batch job. Note that you will need to specify your root account name and set the requested resources as needed for your job. Note that you should request one more core (cpus-per-task) than the total number of executors that you wish to have. This extra core will be used by the PySpark driver. See https://arc.umich.edu/greatlakes/user-guide for more general information on running jobs on Great Lakes.
